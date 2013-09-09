@@ -45,6 +45,18 @@ emoticon.list=c("\\:\\-\\)",
 				"\\:\\("
 				)
 
+emoticon.list <- c(	"\\:\\-\\)","\\:\\)","\\=\\)",
+					"\\:\\-D","\\:D","8\\-D","8D","x\\-D","xD","X\\-D","XD",
+					"\\:\\-\\(","\\:\\(",
+					"\\:\\-\\|","\\:\\|",
+					"\\:\\'\\-\\(","\\:\\'\\(\\)",
+					"\\:\\'\\-\\)","\\:\\'\\)",
+					"\\:\\-o","\\:\\-O","\\:o","\\:O",
+					"o_O","o_0","o\\.O",
+					"\\:\\*","\\;\\-\\)","\\;\\)",
+					"\\%\\-\\)","\\%\\)",
+					"\\<3","\\<\\/3" )
+
 ## oh, oh, oh! Take care that none is a substring of another. 
 ## You can't have ":)" and ":))"; or ">:-)" and ":-)", etc.
 ## The second kind may actually be a concern
@@ -76,16 +88,12 @@ emoticon.score.distributions <-
 
 
 ## 1: Mean,sd
-sapply(emoticon.score.distributions,mean)
+ms<-sapply(emoticon.score.distributions,mean)
 sapply(emoticon.score.distributions,sd)
 
-## 2: ???
-
-
 #####################################
-#To Do (2013-09-05):
+#To Do (2013-09-09):
 #
-## Make more comprehensive emoticon list
 ## Decide how to handle the substring cases
 ## If you can think of any other ways to statistically analyze/plot the distributions, add those
 ##########################################

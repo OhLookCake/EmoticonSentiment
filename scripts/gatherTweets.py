@@ -4,11 +4,11 @@ import urllib2 as urllib
 import json
 import string
 
-access_token_key = ""
-access_token_secret = ""
+access_token_key = "46710702-SqzfnXZxufnl21ZhrZskX68hkA22cmXn3MmNQPbJ0"
+access_token_secret = "344U9Nnntj1izFpOzKnmhsBN5vpFrRw0OUfWiuvjU"
 
-consumer_key = ""
-consumer_secret = ""
+consumer_key = "0k51XWHSPXdQ7RCbsPCffg"
+consumer_secret = "pr0mEgILcHBQpenripWr3nfsSb88cZffBPaJvNgF0k"
 
 _debug = 0
 
@@ -59,7 +59,7 @@ def hasEmoticon(text):
     emoticonlist=[':-)', ':)','=)',
                   ':-D',':D','8-D','8D','x-D','xD','X-D','XD',
                   ':-(',':(',
-                  ':-|',':|'
+                  ':-|',':|',
                   ":'-(", ":'()",
                   ":'-)",":')",
                   ':-o',':-O',':o',':O',
