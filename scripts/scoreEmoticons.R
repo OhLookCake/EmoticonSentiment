@@ -36,14 +36,9 @@ ScoreText <- function(text){
 tweet.scores <- sapply(tweets,ScoreText)
 
 
-#######################################
+#########################################
 #### Part 2: Extract the Emoticon(s) ####
 
-emoticon.list=c("\\:\\-\\)",
-				"\\:\\-\\(",
-				"\\:\\)",
-				"\\:\\("
-				)
 
 emoticon.list <- c(	"\\:\\-\\)","\\:\\)","\\=\\)",
 					"\\:\\-D","\\:D","8\\-D","8D","x\\-D","xD","X\\-D","XD",
@@ -62,7 +57,7 @@ emoticon.list <- c(	"\\:\\-\\)","\\:\\)","\\=\\)",
 ## The second kind may actually be a concern
 ## If you do want them, you'll need to change the matching code somewhat to make sure it only matches the longest one or something
 
-## What about emopticons that lead onto each other? Like ":->" + ">:-)" = ":->:-)"
+## What about emoticons that lead onto each other? Like ":->" + ">:-)" = ":->:-)"
 ## That's a problem too
 
 ## However, it's perfectly okay to have multiple emoticons in the same text. Like "Oh my! :-) :-O"
@@ -70,7 +65,7 @@ emoticon.list <- c(	"\\:\\-\\)","\\:\\)","\\=\\)",
 FindMatches <- function(emoticon,tweets){
 	#This is a simple function, but I'm separating this out because I might want to replace it with a more complex logic that takes care of substrings, etc.
 	grep(emoticon,tweets)
-	#This will return a vector of elements from 'tweets', which contain 'emoticon'
+	#This will return a vector of elements from <tweets> which contain <emoticon>
 }
 
 emoticon.score.distributions <-
@@ -84,18 +79,58 @@ emoticon.score.distributions <-
 
 
 ###############################################
-##### Part 4: Post-processing The results #####
+##### Part 3: Post-processing The results #####
 
 
 ## 1: Mean,sd
-ms<-sapply(emoticon.score.distributions,mean)
-sapply(emoticon.score.distributions,sd)
+emoticon.sentiment.means <- sapply(emoticon.score.distributions,mean)
+emoticon.sentiment.sds   <- sapply(emoticon.score.distributions,sd)
 
-#####################################
+
+
+##2: Plot
+
+clean.scores <- emoticon.score.distributions[sapply(emoticon.score.distributions,length)!=0]
+emoticon.tags <-do.call(c,
+						sapply(1:length(clean.scores), function(x)
+							rep(names(clean.scores[x]),length(clean.scores[[x]])) )
+)
+
+allscores <- do.call(c, clean.scores)
+df.scores<-data.frame(score=as.numeric(allscores),emoticon=emoticon.tags)
+row.names(df.scores)<- 1:nrow(df.scores)
+  #The above is a pretty roundabout way to achieve this. If you can think of something better, let me know
+
+library(ggplot2)
+
+p <- ggplot(data=df.scores,aes(
+	x=score,
+	y=reorder(emoticon,score,mean),
+	color=emoticon,
+	group=emoticon)) 
+
+p.nonzero <- ggplot(data=df.scores[df.scores$score!=0,],aes(
+	x=score,y=reorder(emoticon,score,mean),
+	color=emoticon,
+	group=emoticon)) 
+
+p + geom_point(size=2,alpha=0.6, position = position_jitter(height = 0.2)) +
+	geom_errorbarh(stat = "vline", xintercept = "mean",
+				   height=0.6, size=1,
+				   aes(xmax=..x..,xmin=..x..),color="black") +
+	theme(legend.position="none") +
+	xlab("Score") + ylab("Emoticon") +
+	scale_y_discrete(labels=function(s) { gsub('\\\\','',s) }) #To remove the \\s from the emoticons
+	
+
+## 3: Oddities
+which(grepl("\\:\\-\\(",tweets) & tweet.scores>5)
+
+
+
+####################################################
 #To Do (2013-09-09):
-#
-## Decide how to handle the substring cases
-## If you can think of any other ways to statistically analyze/plot the distributions, add those
-##########################################
+## Decide how to handle the substring cases, if any
+####################################################
 
 

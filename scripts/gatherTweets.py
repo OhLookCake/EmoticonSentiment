@@ -4,11 +4,11 @@ import urllib2 as urllib
 import json
 import string
 
-access_token_key = "46710702-SqzfnXZxufnl21ZhrZskX68hkA22cmXn3MmNQPbJ0"
-access_token_secret = "344U9Nnntj1izFpOzKnmhsBN5vpFrRw0OUfWiuvjU"
+access_token_key = ""
+access_token_secret = ""
 
-consumer_key = "0k51XWHSPXdQ7RCbsPCffg"
-consumer_secret = "pr0mEgILcHBQpenripWr3nfsSb88cZffBPaJvNgF0k"
+consumer_key = ""
+consumer_secret = ""
 
 _debug = 0
 
@@ -76,7 +76,7 @@ def hasEmoticon(text):
 
 def fetchsamples():
     
-    tweetfile = open('C:/etc/Projects/Data/_Ongoing/EmoticonSentiment/data/tweetswithemoticons.txt', 'a')
+    tweetfile = open('C:/etc/Projects/Data/_Ongoing/EmoticonSentiment/data/tweetswithemoticons2.txt', 'a')
     
     url = "https://stream.twitter.com/1/statuses/sample.json"
     parameters = []
@@ -92,7 +92,8 @@ def fetchsamples():
             tweet=' '.join(tweet)
             if hasEmoticon(tweet):
                 #print tweet
-                tweetfile.write(tweet)
+                tweet=tweet.replace("\n"," ") # basically, so that one line in file correponds to exactly one full tweet
+                tweetfile.write("\n" + tweet)
                 ctr+=1
                 if ctr%100==0:
                     print ctr
