@@ -47,18 +47,15 @@ emoticon.list <- c(	"\\:\\-\\)","\\:\\)","\\=\\)",
 					"\\:\\'\\-\\(","\\:\\'\\(\\)",
 					"\\:\\'\\-\\)","\\:\\'\\)",
 					"\\:\\-o","\\:\\-O","\\:o","\\:O",
-					"o_O","o_0","o\\.O",
+					"o_O","o\\.O","O_o","O\\.o",
 					"\\:\\*","\\;\\-\\)","\\;\\)",
-					"\\%\\-\\)","\\%\\)",
+					"\\%\\-\\)",
 					"\\<3","\\<\\/3" )
 
 ## oh, oh, oh! Take care that none is a substring of another. 
 ## You can't have ":)" and ":))"; or ">:-)" and ":-)", etc.
 ## The second kind may actually be a concern
 ## If you do want them, you'll need to change the matching code somewhat to make sure it only matches the longest one or something
-
-## What about emoticons that lead onto each other? Like ":->" + ">:-)" = ":->:-)"
-## That's a problem too
 
 ## However, it's perfectly okay to have multiple emoticons in the same text. Like "Oh my! :-) :-O"
 
